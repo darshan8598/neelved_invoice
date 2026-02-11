@@ -19,7 +19,7 @@ body {
 /* WATERMARK */
 .invoice::before {
     content: "";
-    background: url("logo.png") no-repeat center;
+    background: url("logo.JPG") no-repeat center;
     background-size: 350px;
     opacity: 0.08;
     position: absolute;
@@ -32,6 +32,17 @@ body {
 .invoice * {
     position: relative;
     z-index: 1;
+}
+
+/* TOP LOGOS */
+.top-logos {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.top-logos img {
+    width: 90px;
 }
 
 .center { text-align: center; }
@@ -53,7 +64,7 @@ td, th {
     border: none;
 }
 
-/* LOCKED INPUT STYLE */
+/* INPUT STYLE */
 input, select, textarea {
     width: 100%;
     border: none;
@@ -63,13 +74,9 @@ input, select, textarea {
     background: transparent;
 }
 
-textarea {
-    resize: none;
-}
+textarea { resize: none; }
 
-.no-print {
-    margin-top: 15px;
-}
+.no-print { margin-top: 15px; }
 
 @media print {
     .no-print { display: none; }
@@ -81,7 +88,13 @@ textarea {
 
 <div class="invoice">
 
-<div class="center bold">TAX INVOICE</div>
+<!-- TOP LOGO LEFT & RIGHT -->
+<div class="top-logos">
+    <img src="logo.JPG">
+    <div class="center bold">TAX INVOICE</div>
+    <img src="logo.JPG">
+</div>
+
 <h2 class="center">Neelved Enterprises</h2>
 
 <div class="center">
@@ -126,7 +139,16 @@ textarea {
 
 <br>
 
-<div class="center bold">Sub:- Bill For All Type Industrial Gas</div>
+<!-- SUBJECT DROPDOWN -->
+<div class="center bold">
+    Sub:- 
+    <select id="subjectSelect" style="font-weight:bold;">
+        <option>Bill For Transportation</option>
+        <option selected>Bill For All Type Industrial Gas</option>
+    </select>
+</div>
+
+<br>
 
 <table id="itemTable">
 <tr class="bold center">
@@ -250,10 +272,10 @@ function calcTotal() {
 
     let grand = total * 1.18;
     document.getElementById("total").innerText = grand.toFixed(2);
-    document.getElementById("words").innerText = numberToWords(Math.round(grand)) + " Rupees Only";
+    document.getElementById("words").innerText =
+        numberToWords(Math.round(grand)) + " Rupees Only";
 }
 
-/* NUMBER TO WORDS */
 function numberToWords(num) {
     const a = ["","One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten",
                "Eleven","Twelve","Thirteen","Fourteen","Fifteen","Sixteen","Seventeen","Eighteen","Nineteen"];
